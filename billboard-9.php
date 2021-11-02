@@ -15,12 +15,14 @@
         if (file_exists($file)) {
             $board=json_decode(file_get_contents($file));
         }
+        // 空ファイルの送信防止
         if (!strlen($_REQUEST['name']) or !strlen($_REQUEST['contents'])) {
         foreach ($board as $printer) {
             echo '<p>', $printer, '</p><br>';
         }
     }
         else {
+        // ユーザー名とパスワードを結合
         $board[]=$_REQUEST['name']."の発言: ".$_REQUEST['contents'];
         file_put_contents($file, json_encode($board));
         foreach ($board as $printer) {
