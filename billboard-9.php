@@ -29,6 +29,12 @@
             echo '<p>', $printer, '</p><br>';
         }
     }
+        // データの多重送信を防止
+        if ($_SERVER['REQUEST_METHOD'] == "POST") {
+            // URLはファイルの位置に変更
+            header("Location:https://localhost/billboard-3/billboard-9.php");
+            exit;
+        }
     ?>
     </body>
 </html>
