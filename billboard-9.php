@@ -6,7 +6,7 @@
     <body>
         <h1>Test</h1>
         <form action="" method="post">
-            名前<input type="text" name="name"><br>
+            名前<input type="text" name="name" value="<?php if (!empty($_POST['name'])) {echo $_POST['name'];} ?>"><br>
             本文<input type="text" name="contents">
             <input type="submit" value="投稿">
         </form>
@@ -32,7 +32,7 @@
         // データの多重送信を防止
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             // URLはファイルの位置に変更
-            header("Location:https://localhost/billboard-3/billboard-9.php");
+            header("Location:http://localhost/GitHub/billboard-3/billboard-9.php");
             exit;
         }
     ?>
