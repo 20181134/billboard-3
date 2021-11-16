@@ -17,7 +17,8 @@
         }
         // 空ファイルの送信防止
         if (!strlen($_REQUEST['name']) or !strlen($_REQUEST['contents'])) {
-        foreach ($board as $printer) {
+        //array_reverseで関数のデータを逆順で読み込む
+        foreach (array_reverse($board) as $printer) {
             echo '<p>', $printer, '</p><br>';
         }
     }
@@ -25,7 +26,7 @@
         // ユーザー名とパスワードを結合
         $board[]=$_REQUEST['name']."の発言: ".$_REQUEST['contents'];
         file_put_contents($file, json_encode($board));
-        foreach ($board as $printer) {
+        foreach (array_reverse($board) as $printer) {
             echo '<p>', $printer, '</p><br>';
         }
     }
