@@ -2,6 +2,7 @@
     <head>
         <title>掲示板</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
         <h1>Test</h1>
