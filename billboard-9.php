@@ -7,6 +7,7 @@
     <body>
         <h1>Test</h1>
         <form action="" method="post">
+            <!-- $_SESSION['username']に名前を保存し、inputのvalue属性に代入する -->
             名前<input type="text" name="name" value="<?php session_start(); echo $_SESSION['username']; ?>"><br>
             本文<textarea name="contents"></textarea>
             <input type="submit" value="投稿">
