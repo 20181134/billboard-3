@@ -37,7 +37,7 @@
         // データの多重送信を防止
         if ($_SERVER['REQUEST_METHOD'] == "POST") {
             // URLはファイルの位置に変更
-            header("Location:http://localhost/GitHub/billboard-3/billboard-9.php");
+            header("Location:./billboard-9.php");
             exit;
         }
     ?>
