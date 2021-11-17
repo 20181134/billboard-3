@@ -7,7 +7,7 @@
     <body>
         <h1>Test</h1>
         <form action="" method="post">
-            名前<input type="text" name="name" value="<?php if (!empty($_POST['name'])) {echo $_POST['name'];} ?>"><br>
+            名前<input type="text" name="name" value="<?php session_start(); echo $_SESSION['username']; ?>"><br>
             本文<input type="text" name="contents">
             <input type="submit" value="投稿">
         </form>
@@ -16,6 +16,9 @@
         if (file_exists($file)) {
             $board=json_decode(file_get_contents($file));
         }
+        // 名前の記憶
+        session_start();
+        $_SESSION['username']=$_REQUEST['name'];
         // 空ファイルの送信防止
         if (!strlen($_REQUEST['name']) or !strlen($_REQUEST['contents'])) {
         //array_reverseで関数のデータを逆順で読み込む
