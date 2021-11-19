@@ -8,3 +8,6 @@ br {
     content: "";
     margin: 2px, 0;
 }
+p {
+    white-space: pre-wrap;
+}
