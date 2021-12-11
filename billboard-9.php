@@ -27,7 +27,7 @@
             本文: <textarea name="contents"></textarea>
         </form>
         <?php
-        $file="board.txt";
+        $file="board.json";
         if (file_exists($file)) {
             $board=json_decode(file_get_contents($file));
         }
@@ -36,7 +36,7 @@
             if (!strlen($_REQUEST['name']) or !strlen($_REQUEST['contents'])) {
                 foreach ($board as $printer) {
                     echo '<p>', $printer, '</p><br>';
-                } 
+                }
             } else {
                 $board[]=$_REQUEST['name'].': '.$_REQUEST['contents'];
                 file_put_contents($file, json_decode($board));
@@ -49,13 +49,13 @@
             if (!strlen($_REQUEST['contents'])) {
                 foreach ($board as $printer) {
                     echo '<p>', $printer, '</p><br>';
-                } 
+                }
             } else {
                 $board[]=$_SESSION['user']['username'].': '.$_REQUEST['contents'];
                 file_put_contents($file, json_decode($board));
                 foreach ($board as $printer) {
                     echo '<p>', $printer, '</p><br>';
-                } 
+                }
             }
         }
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
