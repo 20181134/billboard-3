@@ -1,46 +1,66 @@
 <html>
     <head>
-        <title>掲示板</title>
         <meta charset="utf-8">
+        <title>掲示板</title>
         <link rel="stylesheet" href="stylesheet.css">
     </head>
     <body>
-        <h1>Test</h1>
+        <?php
+        session_start();
+        // ログイン機能
+        if (!isset($_SESSION['user'])) {
+            echo '<a href="./login">ログイン</a>';
+        } else {
+            echo $_SESSION['user']['username'];
+        }
+        ?>
+        <hr>
+        <h1>掲示板</h1>
         <form action="" method="post">
-            <!-- $_SESSION['username']に名前を保存し、inputのvalue属性に代入する -->
-            名前<input type="text" name="name" value="<?php session_start(); echo $_SESSION['username']; ?>"><br>
-            本文<textarea name="contents"></textarea>
-            <input type="submit" value="投稿">
+            <?php
+            if (!isset($_SESSION['user'])) {
+                echo 'ユーザー名: <input type="text" name="name">';
+            } else {
+                echo 'ユーザー名: ', $_SESSION['user']['username'];
+            }
+            ?>
+            本文: <textarea name="contents"></textarea>
         </form>
-    <?php
-        $file='board.txt';
+        <?php
+        $file="board.txt";
         if (file_exists($file)) {
             $board=json_decode(file_get_contents($file));
         }
-        // 名前の記憶
-        session_start();
-        $_SESSION['username']=$_REQUEST['name'];
-        // 空ファイルの送信防止
-        if (!strlen($_REQUEST['name']) or !strlen($_REQUEST['contents'])) {
-        //array_reverseで関数のデータを逆順で読み込む
-        foreach (array_reverse($board) as $printer) {
-            echo '<p>', $printer, '</p><br>';
+        // ログインしていない時
+        if (!isset($_SESSION['user'])) {
+            if (!strlen($_REQUEST['name']) or !strlen($_REQUEST['contents'])) {
+                foreach ($board as $printer) {
+                    echo '<p>', $printer, '</p><br>';
+                } 
+            } else {
+                $board[]=$_REQUEST['name'].': '.$_REQUEST['contents'];
+                file_put_contents($file, json_decode($board));
+                foreach ($board as $printer) {
+                    echo '<p>', $printer, '</p><br>';
+                }
+            }
+        } else {
+            //ログインしている時
+            if (!strlen($_REQUEST['contents'])) {
+                foreach ($board as $printer) {
+                    echo '<p>', $printer, '</p><br>';
+                } 
+            } else {
+                $board[]=$_SESSION['user']['username'].': '.$_REQUEST['contents'];
+                file_put_contents($file, json_decode($board));
+                foreach ($board as $printer) {
+                    echo '<p>', $printer, '</p><br>';
+                } 
+            }
         }
-    }
-        else {
-        // ユーザー名とパスワードを結合
-        $board[]=$_REQUEST['name']."の発言: ".$_REQUEST['contents'];
-        file_put_contents($file, json_encode($board));
-        foreach (array_reverse($board) as $printer) {
-            echo '<p>', $printer, '</p><br>';
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            header('Location:./billboard-9.php');
         }
-    }
-        // データの多重送信を防止
-        if ($_SERVER['REQUEST_METHOD'] == "POST") {
-            // URLはファイルの位置に変更
-            header("Location:./billboard-9.php");
-            exit;
-        }
-    ?>
+        ?>
     </body>
 </html>
