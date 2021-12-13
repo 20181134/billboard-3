@@ -9,7 +9,7 @@
         session_start();
         // ログイン機能
         if (isset($_SESSION['user'])) {
-            echo $_SESSION['user']['username'];
+            echo '<a href="./logout.php">', $_SESSION['user']['username'], '</a>';
         } else {
             echo '<a href="./login.php">ログイン</a>';
         }
@@ -24,7 +24,7 @@
                 echo 'ユーザー名: ', $_SESSION['user']['username'];
             }
             ?>
-            本文: <textarea name="contents"></textarea>
+            <br>本文: <textarea name="contents"></textarea>
         </form>
         <?php
         $file="board.json";
