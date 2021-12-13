@@ -8,10 +8,10 @@
         <?php
         session_start();
         // ログイン機能
-        if (!isset($_SESSION['user'])) {
-            echo '<a href="./login">ログイン</a>';
-        } else {
+        if (isset($_SESSION['user'])) {
             echo $_SESSION['user']['username'];
+        } else {
+            echo '<a href="./login.php">ログイン</a>';
         }
         ?>
         <hr>
