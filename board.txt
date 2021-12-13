@@ -1,1 +1,0 @@
-["Kento\u306e\u767a\u8a00: Hello World!","Kento\u306e\u767a\u8a00: Hello World!","Kent\u306e\u767a\u8a00: Hello!","1\u306e\u767a\u8a00: hi","1\u306e\u767a\u8a00: Hello","1\u306e\u767a\u8a00: a","Test\u306e\u767a\u8a00: Hello","Test\u306e\u767a\u8a00: Hello","Test\u306e\u767a\u8a00: a","a\u306e\u767a\u8a00: hello"]
